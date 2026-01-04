@@ -6,10 +6,7 @@
     <title>Guntreddi Lokeswara Rao | Portfolio</title>
     <meta name="description" content="Portfolio of Guntreddi Lokeswara Rao - Cybersecurity & Software Development">
     <style>
-        /* 1. CORE VARIABLES & THEME SETUP 
-           Using data-theme attributes allows us to have different color values
-           for Light vs Dark mode automatically.
-        */
+        /* 1. CORE VARIABLES & THEME SETUP */
         :root {
             --bg: #0d0d0d;
             --text: #c0c0c0;
@@ -35,37 +32,27 @@
             --secondary: #555555;
             --border: #d4d4d8;
             --tag-bg: #fff;
-            /* In light mode, spotlight is very subtle grey */
             --accent-dim: rgba(0,0,0,0.03) !important; 
         }
 
-        /* 2. COLOR THEMES (Adaptive)
-           Dark Mode = Neon / Light Mode = Darker Contrast 
-        */
-
-        /* Green Theme (Default) */
+        /* 2. COLOR THEMES */
         body[data-theme='green'] { --accent: #39ff14; --accent-dim: rgba(57, 255, 20, 0.05); }
-        body.light-mode[data-theme='green'] { --accent: #008f11; } /* Darker green for white paper */
+        body.light-mode[data-theme='green'] { --accent: #008f11; } 
 
-        /* Blue Theme */
         body[data-theme='blue'] { --accent: #00f3ff; --accent-dim: rgba(0, 243, 255, 0.05); }
-        body.light-mode[data-theme='blue'] { --accent: #0077b6; } /* Deep blue for white paper */
+        body.light-mode[data-theme='blue'] { --accent: #0077b6; } 
 
-        /* Orange Theme */
         body[data-theme='orange'] { --accent: #ff5e00; --accent-dim: rgba(255, 94, 0, 0.05); }
-        body.light-mode[data-theme='orange'] { --accent: #d04e00; } /* Burnt orange for white paper */
+        body.light-mode[data-theme='orange'] { --accent: #d04e00; } 
 
-        /* Red Theme */
         body[data-theme='red'] { --accent: #ff0055; --accent-dim: rgba(255, 0, 85, 0.05); }
-        body.light-mode[data-theme='red'] { --accent: #c90044; } /* Deep red for white paper */
-
+        body.light-mode[data-theme='red'] { --accent: #c90044; } 
 
         /* 3. BASE STYLES */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg);
-            /* Dynamic Mouse Spotlight */
             background-image: radial-gradient(
                 circle at var(--mouse-x) var(--mouse-y), 
                 var(--accent-dim) 0%, 
@@ -79,6 +66,7 @@
             -webkit-font-smoothing: antialiased;
             padding: 2rem 1rem;
             transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden; /* Prevents side-scrolling blocking issues */
         }
 
         .container {
@@ -90,7 +78,7 @@
 
         /* Typography */
         h1, h2, h3 { font-weight: 400; color: var(--heading); transition: color 0.3s ease; }
-        h1 { font-size: 1.2rem; letter-spacing: -0.5px; margin-bottom: 0.5rem; }
+        h1 { font-size: 1.2rem; letter-spacing: -0.5px; margin-bottom: 0.5rem; word-wrap: break-word; }
         h2 {
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -128,7 +116,7 @@
             border-radius: 4px;
             margin-top: 10px;
             transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-            border: 1px solid var(--accent); /* Changed to solid accent for visibility in both modes */
+            border: 1px solid var(--accent); 
         }
 
         .status-dot {
@@ -153,7 +141,7 @@
         .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Items (Experience/Projects) */
+        /* Items */
         .item { margin-bottom: 2.5rem; }
         .item-header {
             display: flex; justify-content: space-between; align-items: baseline;
@@ -175,7 +163,7 @@
         }
         .tag:hover {
             background: var(--accent);
-            color: var(--bg); /* Invert text color on hover */
+            color: var(--bg); 
             border-color: var(--accent);
             cursor: default;
         }
@@ -187,15 +175,19 @@
         .skill-list { font-size: 0.85rem; color: var(--secondary); }
 
         /* Footer & Contact */
-        .contact-list { list-style: none; display: flex; gap: 1.5rem; margin-top: 2rem; }
+        .contact-list { list-style: none; display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
 
-        /* 4. CONTROLS (Theme Switcher)
-        */
+        /* 4. CONTROLS (FIXED FOR MOBILE) */
         .controls {
-            position: absolute; top: 0; right: 0;
-            display: flex; gap: 15px; align-items: center;
-            z-index: 100; padding: 10px;
-            background: var(--bg); /* Keeps controls readable */
+            position: absolute; 
+            top: 0; 
+            right: 0;
+            display: flex; 
+            gap: 15px; 
+            align-items: center;
+            z-index: 100; 
+            padding: 10px;
+            background: var(--bg); 
             border-radius: 20px;
             transition: background 0.3s ease;
         }
@@ -208,7 +200,6 @@
         }
         .theme-btn:hover, .theme-btn.active { transform: scale(1.2); opacity: 1; border-color: var(--heading); }
 
-        /* Specific button colors for picker (Just purely for display, logic is handled by data-theme) */
         .btn-green { background: #39ff14; }
         .btn-blue { background: #00f3ff; }
         .btn-orange { background: #ff5e00; }
@@ -222,21 +213,31 @@
         .mode-toggle:hover { color: var(--accent); }
         .mode-icon { width: 20px; height: 20px; fill: currentColor; }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
+        /* MOBILE FIXES */
         @media (max-width: 600px) {
-            body { padding: 1.5rem; }
+            body { 
+                padding: 1.5rem; 
+            }
             .section-content { padding-left: 0; border-left: none; }
             h2 { width: 100%; display: block; }
-            .controls { top: -20px; right: -10px; }
+            
+            /* Crucial: Move controls to normal flow so they don't overlap */
+            .controls {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 1.5rem;
+                padding: 0;
+                justify-content: flex-end;
+                width: 100%;
+            }
+            
+            /* Prevent wrapping issues */
+            h1 { font-size: 1.1rem; }
         }
     </style>
 </head>
-<body data-theme="green"> <!-- Default Theme -->
+<body data-theme="green">
 
 <div class="container">
 
@@ -394,7 +395,7 @@
                 <ul class="contact-list">
                     <li><a href="mailto:lokeswararao04@gmail.com">Email</a></li>
                     <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-                    <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                    <li><a href="https://github.com/lokerao" target="_blank">GitHub</a></li>
                 </ul>
             </div>
         </section>
@@ -407,9 +408,6 @@
 </div>
 
 <script>
-    // ---------------------------------------------
-    // 1. MOUSE SPOTLIGHT (Dynamic Background)
-    // ---------------------------------------------
     document.addEventListener('mousemove', (e) => {
         const x = e.clientX;
         const y = e.clientY;
@@ -417,9 +415,6 @@
         document.documentElement.style.setProperty('--mouse-y', `${y}px`);
     });
 
-    // ---------------------------------------------
-    // 2. SCROLL REVEAL ANIMATION
-    // ---------------------------------------------
     const revealElements = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
         const windowHeight = window.innerHeight;
@@ -432,11 +427,8 @@
         });
     };
     window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Trigger once on load
+    revealOnScroll(); 
 
-    // ---------------------------------------------
-    // 3. THEME & COLOR LOGIC
-    // ---------------------------------------------
     const body = document.body;
     const themeBtns = document.querySelectorAll('.theme-btn');
     const modeToggleBtn = document.getElementById('modeToggle');
@@ -444,23 +436,17 @@
     const iconMoon = document.getElementById('icon-moon');
     let isLightMode = false;
 
-    // COLOR PICKER
     themeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update UI
             themeBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // Set Data Attribute (CSS handles the color values automatically)
             const theme = btn.getAttribute('data-theme');
             body.setAttribute('data-theme', theme);
         });
     });
 
-    // LIGHT/DARK TOGGLE
     modeToggleBtn.addEventListener('click', () => {
         isLightMode = !isLightMode;
-        
         if (isLightMode) {
             body.classList.add('light-mode');
             iconMoon.style.display = 'none';
@@ -474,5 +460,4 @@
 </script>
 
 </body>
-
 </html>
